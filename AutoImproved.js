@@ -26,7 +26,7 @@ var count = 0;
 
 engine.on('game_starting', function(info) {
     //console.log('Game Starting in ' + info.time_till_start);
-	if (pullout==0&&checkBet(betAmount)&&net>noNegative) {
+	if (pullout==0&&checkBet(betAmount)&&(net/100)>noNegative) {
 		console.log('Placing a bet: ',betAmount);
 		cashedOut = false;
 		engine.placeBet( betAmount*100, cashOut*100, true );
