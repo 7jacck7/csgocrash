@@ -2,7 +2,7 @@
 // 		HELLO
 // 		THANKS FOR USING MY SCRIPT.
 // 		THE SCRIPT WAS CREATED BY FREEDOM AND IS 100% FREE
-//      
+//      v1.1
 //      
 //
 // 		I ACCEPT DONATIONS IN FORMS OF COINS.
@@ -35,7 +35,6 @@
 //      
 // 		
 // 		CHANGE SETTINGS HERE BELOW
-	var bettingOn = false;  // CHANGE THIS TO TRUE TO ENABLE BETTING. WILL NOT BET AS LONG AS THIS IS FALSE EVEN IF THE BOT IS STARTED
 	var betAmount = 250;   // THE INITIAL AMOUNT TO BET
 	var cashOutMultiplier = 2 // ALWAYS 2x FOR PAROLI, CHANGE AT YOUR OWN RISK
 //      
@@ -48,7 +47,7 @@
 	var kassaMin = kassa; 
 	var kassaCurrent = kassa;
 	var spelVunna = 0;
-	var spelFörlorade = 0;
+	var spelFÃ¶rlorade = 0;
 	var spelOspelade = 0;
 	var spelTotalt = 0;
 	var cashatIn = true;
@@ -84,8 +83,8 @@ engine.on('game_crash', function(data) {
 		}
 	}
 	else if (temp=="LOST") {
-		spelFörlorade += 1;
-		paroli = paroli+1;
+		spelFÃ¶rlorade += 1;
+		paroli = 1;
 	}
 	else {
 	spelOspelade += 1;
@@ -113,9 +112,7 @@ function placeBet( bet, para, autoplay ) {
     if ( bet >= 250 ) {
       if ( para ) {
         if ( para >= 1 ) {
-          if ( bettingOn ) {
             engine.placeBet( bet*100, para*100, autoplay );
-          }
         }
       }
     }
