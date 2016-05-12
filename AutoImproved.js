@@ -3,7 +3,7 @@
 // a random amount of rounds to stop betting when it lost only to begin again after
 // waiting. This is to reduce the chance of it riding a red train while afking.
 
-var betAmount = 2000;
+var betAmount = 200; // Must be more than or equal to 250
 var cashOut = 1.5; // x
 var noNegative = -10000; // If your net goes this much negative it stops betting
 var Rmin = 5; // Minimum amount of rounds to wait before betting again after a loss
