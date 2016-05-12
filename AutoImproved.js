@@ -1,4 +1,4 @@
-// Version 1.0 - Created by FREEDOM
+// Version 1.1 - Created by FREEDOM
 // This is exactly the same as the AUTO function on the site except this one throws in
 // a random amount of rounds to stop betting when it lost only to begin again after
 // waiting. This is to reduce the chance of riding a red train while afking.
@@ -33,7 +33,6 @@ engine.on('game_starting', function(info) {
 	}
 	else {
 		if (pullout>0) {
-			pullout = pullout-1;
 		}
 		else {	
 		console.log('Bet amount invalid');
@@ -79,7 +78,7 @@ engine.on('game_crash', function(data) {
 	else {
 		count++;
 	}
-	console.log('Net: ', net);
+	console.log('Net: ', net/100);
 });
 
 engine.on('player_bet', function(data) {
