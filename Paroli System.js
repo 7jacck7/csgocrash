@@ -3,13 +3,13 @@
 // 		HELLO
 // 		THANKS FOR USING MY SCRIPT.
 // 		THE SCRIPT WAS CREATED BY FREEDOM AND IS 100% FREE
-//      YOU ARE ALLOWED TO MODIFY AND/OR LEARN HOW MUCH YOU EVER WANT
-//      YOU ARE NOT ALLOWED TO PUT IN MALWARE CODE SUCH AS COIN SEND
+//      
+//      
 //
-// 		I ACCEPT DONATIONS IN FORMS OF COINS.
-// 		ANY AMOUNT WILL DO.. IT ALSO ALLOWS ME TO TEST THE SCRIPT
-// 		MY STEAM ID IS: 76561197986560781
-// 		MANY THANKS
+// 		
+// 		
+// 		
+// 		
 //
 //
 //      ACTIVE SYSTEMS: PAROLI
@@ -125,26 +125,3 @@ function cashOut() {
     cashatIn = true;
   }
 }
-
-
-//Getters:
-console.log('Balance: ' + engine.getBalance());
-console.log('The current payout is: ' + engine.getCurrentPayout());
-console.log('My steamid is: ', engine.getSteamID());
-console.log('The max current bet is: ', engine.getMaxBet()/100, ' coins');
-console.log('The current maxWin is: ', engine.getMaxWin()/100, ' coins');
-// engine.getEngine() for raw engine 
-
-
-//Helpers:
-console.log('Was the last game played? ', engine.lastGamePlayed()?'Yes':'No');
-console.log('Last game status: ', engine.lastGamePlay());
-
-
-//Actions:
-//Do this between the 'game_starting' and 'game_started' events
-//engine.placeBet(bet in coins * 100, auto cash out in percent, auto-play);
-
-//engine.cashOut(); //Do this when playing
-//engine.stop(); //Stops the strategy
-//engine.chat('Hello Spam');
