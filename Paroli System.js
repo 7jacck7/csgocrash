@@ -37,8 +37,8 @@
 // 		
 // 		CHANGE SETTINGS HERE BELOW
 	var bettingOn = true;  // CHANGE THIS TO TRUE TO ENABLE BETTING. WILL NOT BET AS LONG AS THIS IS FALSE EVEN IF THE BOT IS STARTED
-	var betAmount = 260;   // THE INITIAL AMOUNT TO BET
-	var cashOutMultiplier = 1 // ALWAYS 2x FOR PAROLI, CHANGE AT YOUR OWN RISK
+	var betAmount = 1;   // THE INITIAL AMOUNT TO BET
+	var cashOutMultiplier = 2 // ALWAYS 2x FOR PAROLI, CHANGE AT YOUR OWN RISK
 //      
 //      MODIFYING ANYTHING BELOW HERE MAY CAUSE A SHITSTORM, DO AT YOUR OWN RISK
 //
@@ -104,7 +104,7 @@ engine.on('disconnect', function() {
 // BETTA
 function placeBet( bet, para, autoplay ) {
   if ( bet ) {
-    if ( bet >= 250 ) {
+    if ( bet >= 1 ) {
       if ( para ) {
         if ( para >= 1 ) {
           if ( bettingOn ) {
@@ -115,7 +115,7 @@ function placeBet( bet, para, autoplay ) {
     }
   }
   else {
-  console.log('Invalid settings, make sure min bet is 250 and min multiplier is 1');
+  console.log('Invalid settings, make sure min bet is 1 and min multiplier is 1');
   }
 }
 // CASHA IN
