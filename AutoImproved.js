@@ -105,7 +105,7 @@ function errorHandling() {
 		console.log('Random range is wrong. Rmax cannot be lower than Rmin','\n','Bot stopped');
 		engine.stop();
 	}
-	if (pulloutMethod>=3&&pulloutMethod<=0) {
+	if (pulloutMethod>=3||pulloutMethod<=0) {
 		console.log('Wrong pullout method selected','\n','Bot stopped');
 		engine.stop();
 	}
