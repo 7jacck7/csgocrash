@@ -1,4 +1,4 @@
-// Version 1.5 - Created by FREEDOM
+// Version 1.6 - Created by FREEDOM
 // This is exactly the same as the AUTO function on the site except this one throws in
 // a random amount of rounds to stop betting when it lost only to begin again after
 // waiting. This is to reduce the chance of it riding a red train while afking.
@@ -51,6 +51,7 @@ engine.on('game_crash', function(data) {
 	gameResult = engine.lastGamePlay();
 	gameInside = engine.lastGamePlayed();
 	if (gameResult=="WON"&&gameInside==true) {
+		netUpdate();
 		gamesWon += 1;
 		gamesPlayed += 1;
 		logg();
