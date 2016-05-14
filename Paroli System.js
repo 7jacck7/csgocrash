@@ -114,28 +114,3 @@ function stopBot(reason) {
 	console.log(reason,'\n Bot stopped')
 	engine.stop();
 }
-
-// ============================================================
-// ======== NOT USED ==========================================
-// ============================================================
-
-engine.on('game_started', function(data) {
-});
-engine.on('player_bet', function(data) {
-
-});
-engine.on('cashed_out', function(data) {
-
-});
-
-engine.on('msg', function(data) {
-
-});
-
-engine.on('connect', function() {
-    console.log('Client connected, this wont happen when you run the script');
-});
-
-engine.on('disconnect', function() {
-    console.log('Client disconnected');
-});
