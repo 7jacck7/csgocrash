@@ -1,4 +1,4 @@
-//
+//		Paroli system explained: http://www.casinoreviewsquad.com/betting-systems/the-paroli-betting-system/
 //
 // 		HELLO
 // 		THANKS FOR USING MY SCRIPT.
@@ -6,91 +6,130 @@
 //      
 //      
 //
-// 		
-// 		
-// 		
-// 		
-//
-//
-//      ACTIVE SYSTEMS: PAROLI
-//      INACTIVE SYSTEMS: MARTINGALE, D'ALAMBERT(useless system), PARLAY, IRON CROSS, LABOUCHERE, 1-3-2-6 AND OSCARS GRIND
-//
-//
 // 		ANY QUESTIONS? ASK ME IN CHAT @ CSGOCRASH.COM
 //
 // 		BET RESPONSIBLY
 //
-//		
-//      HERE FOLLOWS AN EXAMPLE OF HOW PAROLI SYSTEM WORKS WITH A START BET OF 5000
-//		It works in 3 rounds and after those 3 rounds it restarts.
-//		
-//      Begins with betting the initial amount of 5000 and wins. Net +5000
-//  	Second round is double the initial amount which is 10000 in this case and you win. Net +15000
-//		Third round is double the second amount which is 20000 and here you win. Net +35000
-//      Now its reset to round one again.
-//      
-//		You can only lose your initial amount per 3 round since it restarts if you lose.
-//      First round bets 5000 and wins. +5000
-// 		Second round bets 10000 and loses. -5000
-//      New cycle, First round. 5000.
-//      
+//		  
 // 		
 // 		CHANGE SETTINGS HERE BELOW
-	var bettingOn = true;  // CHANGE THIS TO TRUE TO ENABLE BETTING. WILL NOT BET AS LONG AS THIS IS FALSE EVEN IF THE BOT IS STARTED
-	var betAmount = 1;   // THE INITIAL AMOUNT TO BET
-	var cashOutMultiplier = 2 // ALWAYS 2x FOR PAROLI, CHANGE AT YOUR OWN RISK
+	var baseBet = 2;   // Your basebet
+//      Paroli system requires a set 2x multiplier to work
 //      
-//      MODIFYING ANYTHING BELOW HERE MAY CAUSE A SHITSTORM, DO AT YOUR OWN RISK
-//
+//      
+//		Modifying below this line is done at your own risk
 	
-	var userNameID = engine.getSteamID; 
-	var kassa = engine.getBalance();
-	var kassaMax = kassa;
-	var kassaMin = kassa; 
-	var kassaCurrent = kassa;
-	var spelVunna = 0;
-	var spelFörlorade = 0;
-	var spelTotalt = 0;
-	var cashatIn = true;
-	var senaste = 0;
-	var paroli = 1;
-	var lastGameResult = engine.lastGamePlay();
+	// Money and balance variables
+	var initialBR = engine.getBalance();
+	var curBR = initialBR; // Current balance
+	var minBR = curBR; 			 // Min balance
+	var maxBR = curBR; 			 // Max balance
+	var net = 0;         			 // Current networth.
+	// Tracking wins/losses and total games played
+	var gamesWon = 0;
+	var gamesLost = 0;
+	var gamesTotal = 0;
+	var gamesObserved = 0;
+	// Trackers
+	var gameResult;
+	var gameInside;
+	var paroliCount = 1;
+	var paroliBet = baseBet;
+	var paroliCycles = 0;
+	// Clear console (F12 in chrome)
+	console.log('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n');
+	console.log('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n');
+	console.log('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBot started');
+	
 
-	
-	// Under nedräkning
 engine.on('game_starting', function(info) {
-    console.log('Game Starting in ' + info.time_till_start);
-	betAmount = betAmount*paroli
-	placeBet(betAmount,cashOutMultiplier,true);
-});
-
-engine.on('game_started', function(data) {
-    console.log('Game Started', data);
+	placeBet(paroliBet);
 });
 
 engine.on('game_crash', function(data) {
-    console.log('Game crashed at ', data.game_crash);
-	spelTotalt = spelTotalt+1;
-	senaste = (data.game_crash/100); //
-	console.log(engine.lastGamePlay());	
-	
-});
-//============================================
-// FUCK BITCHES, GET MONEY... in skins
-engine.on('player_bet', function(data) {
-	if (data.steamid == userNameID) {
-	cashatIn = false;
+	gamesObserved += 1;
+	gameResult = engine.lastGamePlay();
+	gameInside = engine.lastGamePlayed();
+	if (gameResult=="WON"&&gameInside==true) {
+		netUpdate();
+		gamesWon += 1;
+		gamesTotal += 1;
 	}
+	else if (gameResult=="LOST"&&gameInside==true) {
+		netUpdate();
+		gamesLost += 1;
+		gamesTotal += 1;
+	}
+	logUpdate();
+});
+function logUpdate() {
+	console.log('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n');
+	console.log('Completed paroli cycles: ',paroliCycles);
+	console.log('Total games observed: ',gamesObserved);
+	console.log('Total games played: ',gamesTotal);
+	console.log('Total games won/lost: ',gamesWon,'/',gamesLost);
+	console.log('Net: ', net/100,'\n');
+	
+}
+function placeBet(bet) {
+	if (bet>curBR) stopBot('Current bet exceeded your balance');	
+	else if (bet<1||bet>engine.getMaxBet()/100) stopBot('Bet invalid. Its too low or above the betting limit');
+	switch (paroliCount) {
+		case 1:
+			paroliBet = baseBet;
+			trueBet();
+			break;
+		case 2: 
+			paroliBet *= 2 
+			if (gameResult=="LOST") paroliBet = baseBet;
+			trueBet();
+			break;
+		case 3: 
+			paroliBet *= 2;
+			if (gameResult=="LOST") paroliBet = baseBet;
+			trueBet();
+			paroliCycles += 1;
+			break;
+		default:
+			stopBot('Paroli count error');
+	}
+}
+function trueBet() {
+	engine.placeBet(paroliBet*100, 200, true);
+	console.log('Paroli round: ',paroliCount,'\nPlacing bet of: ',paroliBet);
+	if (paroliCount==3) paroliCount = 1;
+	else paroliCount += 1;
+}
+function netUpdate() {
+	curBR = engine.getBalance();           
+    if (curBR<minBR) {
+		minBR = curBR;                     
+    } 
+	else if (curBR>maxBR) {
+		maxBR = curBR;                        
+    }
+	net = curBR - initialBR; 
+}
+function stopBot(reason) {
+	console.log(reason,'\n Bot stopped')
+	engine.stop();
+}
+
+// ============================================================
+// ======== NOT USED ==========================================
+// ============================================================
+
+engine.on('game_started', function(data) {
+});
+engine.on('player_bet', function(data) {
+
 });
 engine.on('cashed_out', function(data) {
-	if (data.steamid == userNameID) {
-	cashatIn = true;
-	}
+
 });
-//=============================================
 
 engine.on('msg', function(data) {
-    //console.log('Chat message!...');
+
 });
 
 engine.on('connect', function() {
@@ -100,28 +139,3 @@ engine.on('connect', function() {
 engine.on('disconnect', function() {
     console.log('Client disconnected');
 });
-
-// BETTA
-function placeBet( bet, para, autoplay ) {
-  if ( bet ) {
-    if ( bet >= 1 ) {
-      if ( para ) {
-        if ( para >= 1 ) {
-          if ( bettingOn ) {
-            engine.placeBet( bet*100, para*100, autoplay );
-          }
-        }
-      }
-    }
-  }
-  else {
-  console.log('Invalid settings, make sure min bet is 1 and min multiplier is 1');
-  }
-}
-// CASHA IN
-function cashOut() {
-  if ( !cashatIn ) {
-    engine.cashOut();
-    cashatIn = true;
-  }
-}
