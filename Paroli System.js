@@ -95,7 +95,7 @@ function placeBet(bet) {
 	}
 }
 function trueBet() {
-	engine.placeBet(paroliBet*100, 200, true);
+	engine.placeBet(paroliBet*100, 200, false);
 	console.log('Paroli round: ',paroliCount,'\nPlacing bet of: ',paroliBet);
 	if (paroliCount==3) paroliCount = 1;
 	else paroliCount += 1;
