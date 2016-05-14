@@ -20,7 +20,7 @@ engine.on('msg', function(data) {
 	if (bool) {
 			returnMessage = "Steam64 detected - "+nickname+", do not beg for coins in chat";
 			engine.chat(returnMessage);
-			//returnMessage = "/mute "+idS+" 3h";
+			returnMessage = "/mute "+idS+" 3h";
 			engine.chat(returnMessage);
 			console.log(nickname);			
 		
