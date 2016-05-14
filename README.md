@@ -6,7 +6,7 @@ Follow the instructions provided for maximum experience
 Coin donations are appreciated but far from necessary. Here's my steam64 "76561198109058396".
 I do not accept real money and you can thus not send bitcoins to me.
 
-
+Press F12(Chrome) and navigate to "console" to get outputs from the script.
 
 AutoImproved:
   Its the same AUTO as the website already provides but with additional features
