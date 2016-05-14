@@ -22,14 +22,14 @@ var fuuu;
 engine.on('msg', function(data) {
 	idDetected = false;						
 
-    nickname = data.nickname;  			
+    	nickname = data.nickname;  			
 	message = data.message;
 	message = message.toLowerCase();
 	id = data.steamid;					
 	idS = id.toString();                
 	steam64(idS,message,nickname);		//Check if hes posting steam64 ID
 //	spam(idS,message,nickname);         //Check if hes spamming
-    offensive(idS,message,nickname);	//Check if hes being rude/offensive
+    	offensive(idS,message,nickname);	//Check if hes being rude/offensive
 });
 function steam64(id,message,name) {
 	for (var i = 0; i < message.length+1-id.length; i++) {
