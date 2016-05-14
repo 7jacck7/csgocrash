@@ -1,3 +1,5 @@
+"n is not a function" is an error on the website and has nothing to do with the script
+
 Hello,
 
 Thanks for using my script. All scripts work on both csgocrash.com and bustabit.com
