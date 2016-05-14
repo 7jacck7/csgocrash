@@ -119,7 +119,7 @@ function errorHandling() {
 function placeBet() {
 	if (pullout2count==0&&pullout==0&&(net/100)>noNegative) {
 		cashedOut = false;
-		engine.placeBet( betAmount*100, cashOut*100, true );
+		engine.placeBet( betAmount*100, cashOut*100, false );
 		console.log('Placing a bet: ',betAmount);
 	}
 	else {
