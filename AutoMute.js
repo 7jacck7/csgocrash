@@ -34,22 +34,25 @@ var idS;
 var returnMessage;
 var spamCount = 0;
 var spamLastID;
+var role;
 
 
 engine.on('msg', function(data) {
+	role = data.role;
+	console.log(role);
     nickname = data.nickname;  			
 	message = data.message;
 	message = message.toLowerCase();
 	id = data.steamid;					
 	idS = id.toString();                
-	if (steam64) steam64i(idS,message,nickname);		//Check if hes posting steam64 ID
-    if (spam)	spami(idS,nickname);         			//Check if hes spamming
-    if (offensive) offensivei(idS,message,nickname);	//Check if hes being rude/offensive
+	if (steam64&&(role=="user")) steam64i(idS,message,nickname);		//Check if hes posting steam64 ID
+    if (spam&&(role=="user"))	spami(idS,nickname);         			//Check if hes spamming
+    if (offensive&&(role=="user")) offensivei(idS,message,nickname);	//Check if hes being rude/offensive
 });
 function steam64i(id,message,name) {
 	for (var i = 0; i < message.length+1-id.length; i++) {
 		if (message.substring(i,(i+id.length))==id) {
-			returnMessage = "Steam64 detected - "+name+", do not beg for coins in chat you filth";
+			returnMessage = "Steam64 detected - "+name+", do not beg for coins in chat";
 			engine.chat(returnMessage);
 			returnMessage = "/mute "+id+" "+steam64Duration+steam64B;
 			engine.chat(returnMessage);
@@ -65,7 +68,6 @@ function offensivei(id,message,name) {
 				engine.chat(returnMessage);
 				returnMessage = "/mute "+id+" "+languageDuration+languageB;
 				engine.chat(returnMessage);
-				break;
 			}		
 		}
 	}
