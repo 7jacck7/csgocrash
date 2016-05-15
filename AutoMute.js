@@ -5,7 +5,7 @@
 // ============== TURN ON / OFF =================== 
 var steam64 = true; 	// Check for steam64 			(true = on, false = off)
 var offensive = true;   // Check for offensive language (true = on, false = off)
-var spam = true; 		// Check for spam 				(true = on, false = off)
+var spam = true; 	// Check for spam 				(true = on, false = off)
 // ================================================
 
 // ============= DURATION AND M/H/D/Y SETTINGS =============================
@@ -18,7 +18,7 @@ var messagesMax = 5;   		 // Amount of messages in a row to be countes as spam
 
 var steam64B = "h"; 		 // (m = minutes, h = hours, d = days, y = years)
 var languageB = "m"; 		 // (m = minutes, h = hours, d = days, y = years)
-var spamB = "m"; 		 	 // (m = minutes, h = hours, d = days, y = years)
+var spamB = "m"; 		 // (m = minutes, h = hours, d = days, y = years)
 
 // Notes to add here, you can actually check for other stuff than profanity
 // You can for example track "can i have" or "send coins pls"
@@ -39,15 +39,14 @@ var role;
 
 engine.on('msg', function(data) {
 	role = data.role;
-	console.log(role);
-    nickname = data.nickname;  			
+    	nickname = data.nickname;  			
 	message = data.message;
 	message = message.toLowerCase();
 	id = data.steamid;					
 	idS = id.toString();                
 	if (steam64&&(role=="user")) steam64i(idS,message,nickname);		//Check if hes posting steam64 ID
-    if (spam&&(role=="user"))	spami(idS,nickname);         			//Check if hes spamming
-    if (offensive&&(role=="user")) offensivei(idS,message,nickname);	//Check if hes being rude/offensive
+    	if (spam&&(role=="user"))	spami(idS,nickname);         		//Check if hes spamming
+    	if (offensive&&(role=="user")) offensivei(idS,message,nickname);	//Check if hes being rude/offensive
 });
 function steam64i(id,message,name) {
 	for (var i = 0; i < message.length+1-id.length; i++) {
