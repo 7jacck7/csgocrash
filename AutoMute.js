@@ -73,10 +73,12 @@ function spami(id,name) {
 	if (id==spamLastID) {
 		spamCount += 1;
 		if (spamCount>messagesMax) {
+			spamCount = 1;
 			returnMessage = "Spam detected - "+name+", do not spam";
 			engine.chat(returnMessage);
 			returnMessage = "/mute "+id+" "+spamDuration+spamB;
-			engine.chat(returnMessage);		
+			engine.chat(returnMessage);	
+
 		}
 	}
 	else {
