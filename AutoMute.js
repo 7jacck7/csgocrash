@@ -65,6 +65,7 @@ function offensivei(id,message,name) {
 				engine.chat(returnMessage);
 				returnMessage = "/mute "+id+" "+languageDuration+languageB;
 				engine.chat(returnMessage);
+				break;
 			}		
 		}
 	}
