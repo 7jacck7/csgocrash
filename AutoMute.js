@@ -3,9 +3,14 @@
 // CREATED BY FREEDOM - 100% FREE SCRIPTS
 
 // ============== TURN ON / OFF =================== 
-var steam64 = true; 	// Check for steam64 			(true = on, false = off)
+var steam64 = true; 	// Check for steam64 		(true = on, false = off)
 var offensive = true;   // Check for offensive language (true = on, false = off)
-var spam = true; 	// Check for spam 				(true = on, false = off)
+var spam = true; 	// Check for spam 		(true = on, false = off)
+var modIsCrazy = false; // Then he turned to his mute-o-master, 
+// 			// "Mute them all," he said. 
+//                      // "Mute them in their homes." 
+//                      // "Mute them in their beds."
+//                      // Game of Mods, season 1 episode 6 "Watch them mute/Modslayer"
 // ================================================
 
 // ============= DURATION AND M/H/D/Y SETTINGS =============================
@@ -25,6 +30,7 @@ var spamB = "m"; 		 // (m = minutes, h = hours, d = days, y = years)
 
 var profanity = ["nigga", "nigger","rigged","scam site"];
 
+// =========================================================================
 
 // No touchy touchy beyond this line (unless you know what youre doin)
 var nickname;
@@ -35,23 +41,25 @@ var returnMessage;
 var spamCount = 0;
 var spamLastID;
 var role;
+var crazyAF;
 
 
 engine.on('msg', function(data) {
 	role = data.role;
-    	nickname = data.nickname;  			
+	console.log(role);
+    nickname = data.nickname;  			
 	message = data.message;
 	message = message.toLowerCase();
 	id = data.steamid;					
 	idS = id.toString();                
 	if (steam64&&(role=="user")) steam64i(idS,message,nickname);		//Check if hes posting steam64 ID
-    	if (spam&&(role=="user"))	spami(idS,nickname);         		//Check if hes spamming
-    	if (offensive&&(role=="user")) offensivei(idS,message,nickname);	//Check if hes being rude/offensive
+    if (spam&&(role=="user"))	spami(idS,nickname);         			//Check if hes spamming
+    if (offensive&&(role=="user")) offensivei(idS,message,nickname);	//Check if hes being rude/offensive
 });
 function steam64i(id,message,name) {
 	for (var i = 0; i < message.length+1-id.length; i++) {
 		if (message.substring(i,(i+id.length))==id) {
-			returnMessage = "Steam64 detected - "+name+", do not beg for coins in chat";
+			returnMessage = "Steam64 detected - "+name+", do not beg for coins in chat you filth";
 			engine.chat(returnMessage);
 			returnMessage = "/mute "+id+" "+steam64Duration+steam64B;
 			engine.chat(returnMessage);
@@ -88,3 +96,18 @@ function spami(id,name) {
 		spamLastID = id;
 	}
 }
+engine.on('player_bet', function(data) {
+	if (modIsCrazy) {
+		crazyAF = "/mute "+data.steamid+" 5s";
+		engine.chat(crazyAF);
+	}
+   
+});
+
+engine.on('cashed_out', function(resp) {
+    	if (modIsCrazy) {
+		crazyAF = "/mute "+resp.steamid+" 5s";
+		engine.chat(crazyAF);
+	}
+});
+
