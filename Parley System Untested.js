@@ -63,6 +63,7 @@ engine.on('game_crash', function(data) {
 	else if (gameResult=="LOST"&&gameInside==true) {
 		netUpdate();
 		parleyBet = bet;
+		parleyCount = 1;
 		gamesLost += 1;
 		gamesTotal += 1;
 	}
