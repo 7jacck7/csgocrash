@@ -1,0 +1,39 @@
+var players = 0;
+var msg1 = "In this round people lost their bets";
+var joke = 0;
+rounds = 0;
+engine.on('player_bet', function(data) {
+    console.log('The player ', data.steamid, data.nickname, ' placed a bet. Counting + 1')
+players += 1;
+});
+engine.on('cashed_out', function(resp) {
+    console.log('The player ', resp.steamid, resp.nickname, ' cashed out. Counting - 1');
+players -= 1;
+});
+engine.on('game_crash', function(data) {
+    console.log('Game crashed at ', data.game_crash);
+console.log('Bets lost: ',players);
+msg1 = "This round "+players.toString()+" people lost their bets";
+rounds +=1
+console.log(rounds)
+	if (rounds >=7){
+	if (players>=17) {
+	//Add more jokes by copy & pasting(delete all " in your joke)
+		if (joke==0){engine.chat("For everyone that lost their bet: Can a kangaroo jump higher than a house? Of course, a house doesn’t jump at all.") }
+		if (joke==1){engine.chat("For everyone that lost their bet: Doctor: I'm sorry but you suffer from a terminal illness and have only 10 to live. Patient: What do you mean, 10? 10 what? Months? Weeks?! Doctor: Nine.")}
+		if (joke==2){engine.chat("For everyone that lost their bet: A man asks a farmer near a field, Sorry sir, would you mind if I crossed your field instead of going around it? You see, I have to catch the 4:23 train. The farmer says, Sure, go right ahead. And if my bull sees you, you’ll even catch the 4:11 one.")}
+    if (joke==3){engine.chat("For everyone that lost their bet: Why is it a bad idea for two butt cheeks to get married? Because they part for every little shit.")}
+		if (joke==4){engine.chat("For everyone that lost their bet: It is so cold outside I saw a politician with his hands in his own pockets.")}
+		if (joke==5){engine.chat("For everyone that lost their bet: My dog used to chase people on a bike a lot. It got so bad, finally I had to take his bike away.")}
+		if (joke==6){engine.chat("For everyone that lost their bet: What is the difference between a snowman and a snowwoman? -Snowballs.")}
+		if (joke==7){engine.chat("For everyone that lost their bet: Mother, How was school today, Patrick? Patrick: It was really great mum! Today we made explosives! Mother: Ooh, they do very fancy stuff with you these days. And what will you do at school tomorrow? Patrick: What school?")}
+		if (joke==8){engine.chat("For everyone that lost their bet: Mom, where do tampons go? Where the babies come from, darling. In a stork???!!!")}
+		if (joke==9){engine.chat("For everyone that lost their bet: Scientists have now discovered how women keep their secrets. They do so within groups of 40.")}
+		if (joke==10){engine.chat("For everyone that lost their bet: My wife’s cooking is so bad we usually pray after our food.")}
+		joke +=1;
+		rounds = 0
+	}
+	}
+	console.log(msg1);
+players = 0;
+});
