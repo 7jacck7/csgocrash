@@ -42,7 +42,7 @@ var spamCount = 0;
 var spamLastID;
 var role;
 var crazyAF;
-
+var debug;
 
 engine.on('msg', function(data) {
 	role = data.role;
@@ -59,11 +59,14 @@ engine.on('msg', function(data) {
 function steam64i(id,message,name) {
 	for (var i = 0; i < message.length+1-id.length; i++) {
 		if (message.substring(i,(i+id.length))==id) {
+			if (!message.substring((i-5),i)=="user/") {
 			returnMessage = "Steam64 detected - "+name+", do not beg for coins in chat you filth";
 			engine.chat(returnMessage);
 			returnMessage = "/mute "+id+" "+steam64Duration+steam64B;
 			engine.chat(returnMessage);
 			break;
+			}
+
 		}                      
 	}
 }
@@ -110,4 +113,3 @@ engine.on('cashed_out', function(resp) {
 		engine.chat(crazyAF);
 	}
 });
-
