@@ -49,62 +49,64 @@ engine.on('msg', function(data) {
 	steam64 = data.steamid
 	date = data.date
 	nickname = data.nickname
-message = message.toLowerCase();
-if((message.indexOf(ballc)>-1)==true){ballin};
-if((message.indexOf(jokec)>-1)==true){joke};
-if((message.indexOf(statisticsc)>-1)==true){stats};
-if((message.indexOf(lostc)>-1)==true){ballin};
-if((message.indexOf(wonc)>-1)==true){ballin};
-if((message.indexOf(avgc)>-1)==true){ballin};
-if((message.indexOf(steam64c)>-1)==true){ballin};
-if((message.indexOf(datec)>-1)==true){ballin};
-if((message.indexOf(nickc)>-1)==true){ballin};
-if((message.indexOf(helpc)>-1)==true){ballin};
+	console.log(message)
+if((message.indexOf(ballc)>-1)==true)ballin();
+if((message.indexOf(jokec)>-1)==true)joke();
+if((message.indexOf(statisticsc)>-1)==true)stats();
+if((message.indexOf(lostc)>-1)==true)lost();
+if((message.indexOf(wonc)>-1)==true)won();
+if((message.indexOf(avgc)>-1)==true)average();
+if((message.indexOf(steam64c)>-1)==true)steamid();
+if((message.indexOf(datec)>-1)==true)datefc();
+if((message.indexOf(nickc)>-1)==true)nickfc();
+if((message.indexOf(helpc)>-1)==true)hälp();
 });
 //8ball Function
 function ballin() {
 balls += 1
-	if (balls = 0){returnMessage = "Almost."};
-	if (balls = 1){returnMessage = "Try again later."};
-	if (balls = 2){returnMessage = "Yes."};
-	if (balls = 3){returnMessage = "No."};
-	if (balls = 4){returnMessage = "Trust your feelings"};
-	if (balls = 5){returnMessage = "Maybe."};
-	if (balls = 6){returnMessage = "Without a doubt."};
-	if (balls = 7){returnMessage = "It has been decided so."};
-	if (balls = 8){returnMessage = "Dont count on it."};
-	if (balls = 9){returnMessage = "I think so yes."};
-	if (balls = 10){returnMessage = "Re-align your chakras and try again."};
-	if (balls = 11){returnMessage = "Wait for the next alignment of the planets."};
-	if (balls = 12){returnMessage = "Reply hazy and try again."};
-	if (balls = 13){balls = -1};
+console.log('8ballin')
+	if (balls == 0){returnMessage = "Almost."};
+	if (balls == 1){returnMessage = "Try again later."};
+	if (balls == 2){returnMessage = "Yes."};
+	if (balls == 3){returnMessage = "No."};
+	if (balls == 4){returnMessage = "Trust your feelings"};
+	if (balls == 5){returnMessage = "Maybe."};
+	if (balls == 6){returnMessage = "Without a doubt."};
+	if (balls == 7){returnMessage = "It has been decided so."};
+	if (balls == 8){returnMessage = "Dont count on it."};
+	if (balls == 9){returnMessage = "I think so yes."};
+	if (balls == 10){returnMessage = "Re-align your chakras and try again."};
+	if (balls == 11){returnMessage = "Wait for the next alignment of the planets."};
+	if (balls == 12){returnMessage = "Reply hazy and try again."};
+	if (balls == 13){balls = -1};
 	engine.chat(returnMessage);
 }
 //Joke function
 function joke()  {
 jokes +=1;
-if (jokes = 0){returnMessage = "What should you put on the tomb stone of a mathematician? He didn't count with this..."};
-if (jokes = 1){returnMessage = "How can you tell you have a really bad case of acne? It’s when the blind try to read your face."};
-if (jokes = 2){returnMessage = "Me and my wife decided that we don't want to have children anymore. So anybody who wants one can leave us their phone number and address and we will bring you one."};
-if (jokes = 3){returnMessage = "My girlfriend told me I was one in a million. When I looked through her text messages, I had to admit she was right."};
-if (jokes = 4){returnMessage = "After many years of studying at a university, I’ve finally become a PhD… or Pizza Hut Deliveryman as people call it."};
-if (jokes = 5){returnMessage = "There is nothing worse than child polio. No wait, there's women's soccer."};
-if (jokes = 6){returnMessage = "Q: Why did the shark keep swimming in circles? A: It had a nosebleed."};
-if (jokes = 7){returnMessage = "Pessimist: Things just can't get any worse! Optimist: Nah, of course they can!"};
-if (jokes = 8){returnMessage = "I wanted to grow my own food but I couldn’t get bacon seeds anywhere."};
-if (jokes = 10){returnMessage = "I was in a restaurant once and I suddenly realized I desperately needed to pass gas. The music was really, really loud, so I timed my reliefs to the beat of the music. After just a few songs I started to feel better. I finished my coffee, and noticed that everybody was staring at me... That was when I remembered I was listening to my iPod."};
-if (jokes = 11){returnMessage = "Why do women live on average two years longer? Because the time they spend parking doesn’t count."};
-if (jokes = 12){returnMessage = "I can’t believe I forgot to go to the gym today. That’s 7 years in a row now."};
-if (jokes = 13){returnMessage = "Woke up with a dead leg this morning. I will not take out a loan with the mafia ever again."};
-if (jokes = 14){returnMessage = "A naked women robbed a bank. Nobody could remember her face."};
-if (jokes = 15){returnMessage = "How do you tell that a crab is drunk? It walks forwards."};
-if (jokes = 16){returnMessage = "Do you know what you can hold without ever touching it? A conversation"};
-if (jokes = 17){returnMessage = "Can a kangaroo jump higher than a house? Of course, a house doesn’t jump at all."};
-if (jokes = 18){returnMessage = "My dog used to chase people on a bike a lot. It got so bad, finally I had to take his bike away."};
-if (jokes = 19){returnMessage = "What is the difference between a snowman and a snowwoman? Snowballs."};
-if (jokes = 20){returnMessage = "Scientists have now discovered how women keep their secrets. They do so within groups of 40."};
-if (jokes = 21){jokes = -1};
+if (jokes == 0){returnMessage = "What should you put on the tomb stone of a mathematician? He didn't count with this..."};
+if (jokes == 1){returnMessage = "How can you tell you have a really bad case of acne? It’s when the blind try to read your face."};
+if (jokes == 2){returnMessage = "Me and my wife decided that we don't want to have children anymore. So anybody who wants one can leave us their phone number and address and we will bring you one."};
+if (jokes == 3){returnMessage = "My girlfriend told me I was one in a million. When I looked through her text messages, I had to admit she was right."};
+if (jokes == 4){returnMessage = "After many years of studying at a university, I’ve finally become a PhD… or Pizza Hut Deliveryman as people call it."};
+if (jokes ==5){returnMessage = "There is nothing worse than child polio. No wait, there's women's soccer."};
+if (jokes == 6){returnMessage = "Q: Why did the shark keep swimming in circles? A: It had a nosebleed."};
+if (jokes == 7){returnMessage = "Pessimist: Things just can't get any worse! Optimist: Nah, of course they can!"};
+if (jokes == 8){returnMessage = "I wanted to grow my own food but I couldn’t get bacon seeds anywhere."};
+if (jokes == 10){returnMessage = "I was in a restaurant once and I suddenly realized I desperately needed to pass gas. The music was really, really loud, so I timed my reliefs to the beat of the music. After just a few songs I started to feel better. I finished my coffee, and noticed that everybody was staring at me... That was when I remembered I was listening to my iPod."};
+if (jokes == 11){returnMessage = "Why do women live on average two years longer? Because the time they spend parking doesn’t count."};
+if (jokes == 12){returnMessage = "I can’t believe I forgot to go to the gym today. That’s 7 years in a row now."};
+if (jokes == 13){returnMessage = "Woke up with a dead leg this morning. I will not take out a loan with the mafia ever again."};
+if (jokes == 14){returnMessage = "A naked women robbed a bank. Nobody could remember her face."};
+if (jokes == 15){returnMessage = "How do you tell that a crab is drunk? It walks forwards."};
+if (jokes == 16){returnMessage = "Do you know what you can hold without ever touching it? A conversation"};
+if (jokes == 17){returnMessage = "Can a kangaroo jump higher than a house? Of course, a house doesn’t jump at all."};
+if (jokes == 18){returnMessage = "My dog used to chase people on a bike a lot. It got so bad, finally I had to take his bike away."};
+if (jokes == 19){returnMessage = "What is the difference between a snowman and a snowwoman? Snowballs."};
+if (jokes == 20){returnMessage = "Scientists have now discovered how women keep their secrets. They do so within groups of 40."};
+if (jokes > 20){jokes = -1};
 engine.chat(returnMessage);
+console.log(jokes)
 }
 //Stats Function
 function stats(){
