@@ -16,7 +16,9 @@ var jokes = -1
 var date = 0
 var steam64 = 0
 var nickname = "test"
-
+var help1 = "Use !help to print out this help in the Chat. Use !8ball to ask magic 8ball something. Use !joke to get a joke. Use !stats to print out the current statistics in the chat. Use !lost to print out how many bets were lost in the chat. Use !won to print out the won bets in the chat."
+var help2 = "Use !avg to print out the average crash value in the chat. Use !steam64 to get your Steam64-ID printed out in the chat. Use !date to get the current date(the server date) printed out in the chat. Use !nick to get your nickname printed out in the chat."
+var checker = 0
 //Statistic Variables
 var crashes = 0;
 var crash0 = 0;
@@ -39,27 +41,33 @@ currentcrash = data.game_crash;
 crashes +=1;
 crashvalues += currentcrash;
 var averagecrash = crashvalues /crashes;
-if (currentcrash==0) {crash0 +=1;};
-if (currentcrash>>199){crashover2 +=1;};
-if (currentcrash<=199){crashunder2 +=1;};
+if ((currentcrash)==0) {crash0 +=1;};
+if ((currentcrash)>>199){crashover2 +=1;};
+if ((currentcrash)<=199){crashunder2 +=1;};
+console.log("The current average crash is at  "+averagecrash/100+" . "+averagecrash)
 });
 //Check for Commands
 engine.on('msg', function(data) {
+if(data.message == help1){checker = 1}
+if(data.message == help2){checker = 2}
+if(checker == 0){
 	message = data.message;
-	steam64 = data.steamid
-	date = data.date
-	nickname = data.nickname
-	console.log(message)
-if((message.indexOf(ballc)>-1)==true)ballin();
-if((message.indexOf(jokec)>-1)==true)joke();
-if((message.indexOf(statisticsc)>-1)==true)stats();
-if((message.indexOf(lostc)>-1)==true)lost();
-if((message.indexOf(wonc)>-1)==true)won();
-if((message.indexOf(avgc)>-1)==true)average();
-if((message.indexOf(steam64c)>-1)==true)steamid();
-if((message.indexOf(datec)>-1)==true)datefc();
-if((message.indexOf(nickc)>-1)==true)nickfc();
-if((message.indexOf(helpc)>-1)==true)hälp();
+	steam64 = data.steamid;
+	date = data.date;
+	nickname = data.nickname;
+	console.log(message);
+	if((message.indexOf(ballc)>-1)==true)ballin();
+	if((message.indexOf(jokec)>-1)==true)joke();
+	if((message.indexOf(statisticsc)>-1)==true)stats();
+	if((message.indexOf(lostc)>-1)==true)lost();
+	if((message.indexOf(wonc)>-1)==true)won();
+	if((message.indexOf(avgc)>-1)==true)average();
+	if((message.indexOf(steam64c)>-1)==true)steamid();
+	if((message.indexOf(datec)>-1)==true)datefc();
+	if((message.indexOf(nickc)>-1)==true)nickfc();
+	if((message.indexOf(helpc)>-1)==true)hälp();
+}
+checker = 0;
 });
 //8ball Function
 function ballin() {
@@ -110,41 +118,43 @@ console.log(jokes)
 }
 //Stats Function
 function stats(){
-returnMessage=("Last game crashed at "+data.game_crash/100+". Average crash currently is  "+averagecrash /100+". Game crashed at 0  "+crash0+" Times. It crashed  "+crashunder2+" times under 2 and "+crashover2+" times over 2. "+betsplaced+" Bets were placed and "+cashed_out+" were cashed0ut again. These statistics were collect in "+crashes+" Rounds. Brought to you by 4rn0ld_Schw4rz3nsw4gg3r with the help of FREEDOM. You can find our scripts at https://github.com/FreeSapling/csgocrash.");
+returnMessage=("Last game crashed at "+currentcrash/100+". Average crash currently is  "+averagecrash /100+". Game crashed at 0  "+crash0+" Times. It crashed  "+crashunder2+" times under 2 and "+crashover2+" times over 2. "+betsplaced+" Bets were placed and "+cashed_out+" were cashed0ut again. These statistics were collect in "+crashes+" Rounds. For more Information visit https://github.com/FreeSapling/csgocrash.");
 engine.chat(returnMessage)
 }
 //Lost function
 function lost(){
-	returnMessage = " "+betsplaced-cashed_out+" Bets were lost."
-	engine.chat(returnMessage)
+	returnMessage = " "+betsplaced-cashed_out+" Bets were lost.";
+	engine.chat(returnMessage);
 	}
 //Won function
 	function won(){
-	returnMessage = " "+cashed_out+" Bets were won."
-	engine.chat(returnMessage)
+	returnMessage = " "+cashed_out+" Bets were won.";
+	engine.chat(returnMessage);
 	}
 //Average Function
 function average(){
-	returnMessage = "The current average crash is at  "+averagecrash /100+"."
-	engine.chat(returnMessage)
+	returnMessage = "The current average crash is at  "+averagecrash/100+" .";
+	engine.chat(returnMessage);
 	}
 //Steam64 Function
 function steamid(){
-	returnMessage = "Your Steam64-ID is "+steam64+"."
-	engine.chat(returnMessage)
+	returnMessage = "Your Steam64-ID is "+steam64+".";
+	engine.chat(returnMessage);
 	}
 //Date Function
 function datefc(){
-	returnMessage = "The server Date is "+date+"."
-	engine.chat(returnMessage)
+	returnMessage = "The server Date is "+date+".";
+	engine.chat(returnMessage);
 	}
 //Nick Function
 function nickfc(){
-	returnMessage = "Your current Nickname is "+nickname+"."
-	engine.chat(returnMessage)
+	returnMessage = "Your current Nickname is "+nickname+".";
+	engine.chat(returnMessage);
 	}
 //Help Function
 function hälp(){
-	returnMessage = "Use !help to print out this help in the Chat. Use !8ball to ask magic 8ball something. Use !joke to get a joke. Use !stats to print out the current statistics in the chat. Use !lost to print out how many bets were lost in the chat. Use !won to print out the won bets in the chat. Use !avg to print out the average crash value in the chat. Use !steam64 to get your Steam64-ID printed out in the chat. Use !date to get the current date(the server date) printed out in the chat. Use !nick to get your nickname printed out in the chat."
-	engine.chat(returnMessage)
+	command = 2
+	engine.chat("Use !help to print out this help in the Chat. Use !8ball to ask magic 8ball something. Use !joke to get a joke. Use !stats to print out the current statistics in the chat. Use !lost to print out how many bets were lost in the chat. Use !won to print out the won bets in the chat.")
+	command = 2
+	engine.chat("Use !avg to print out the average crash value in the chat. Use !steam64 to get your Steam64-ID printed out in the chat. Use !date to get the current date(the server date) printed out in the chat. Use !nick to get your nickname printed out in the chat.")
 	}
