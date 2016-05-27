@@ -1,0 +1,2 @@
+//Auto steam64 script
+engine.on('msg', function(data) {console.log(data.nickname+" wrote a message. His steam64 is "+data.steamid+". The message was "+data.message)})
